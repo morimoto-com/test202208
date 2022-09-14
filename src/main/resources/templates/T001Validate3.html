@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- layoutを使わないバージョン -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>T001Validate</title>
+    <meta charset="utf-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</head>
+<body>
+    <form th:action="@{/t001}" th:method="post" th:object="${t001ValidateForm}" >
+        <div class="container　container-m">
+            <div th:if="${infoMessage}" class="row">
+                <div class="col-md-12 m-3">
+                    <div class="p-3 mb-2 bg-success text-white">
+                        <label th:text="${infoMessage}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 m-3">
+                    <label>text1</label>
+                    <!-- １．th:errorclass="border-danger" -->
+                    <!-- ２．th:classappend="${#fields.hasErrors('textEmpty')} ? 'border-danger'" -->
+                    <!-- １と２はどちらもエラーの場合テキストボックスを赤枠に返る処理。１の方がシンプルだが、"text1"というフィールドに対するエラーしか拾えない。今回は相関チェックで"textEmpty"というフィールドも拾いたいので２も使用した。 -->
+                    <input th:field="*{text1}" th:errorclass="border-danger" th:classappend="${#fields.hasErrors('textEmpty')} ? 'border-danger'">
+                    <div class="text-danger" th:if="${#fields.hasErrors('text1')}" th:errors="*{text1}"></div>
+                    <div class="text-danger" th:if="${#fields.hasErrors('textEmpty')}" th:errors="*{textEmpty}"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 m-3">
+                    <label>text2</label>
+                    <input th:field="*{text2}" th:classappend="${#fields.hasErrors('text2') || #fields.hasErrors('textEmpty')} ? 'border-danger'">
+                    <div class="text-danger" th:if="${#fields.hasErrors('text2')}" th:errors="*{text2}"></div>
+                    <div class="text-danger" th:if="${#fields.hasErrors('textEmpty')}" th:errors="*{textEmpty}"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 m-3">
+                    <button name="validated1" type="submit">入力チェック１</button>
+                    <button name="validated2" type="submit">入力チェック２</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

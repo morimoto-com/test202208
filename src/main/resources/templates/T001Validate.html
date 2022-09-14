@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{components/layout}">
+<head>
+    <title>T001Validate</title>
+</head>
+<body>
+<div layout:fragment="header">T001Validate</div>
+<div layout:fragment="contents">
+    <form th:action="@{/t001}" th:method="post" th:object="${t001ValidateForm}" >
+        <div class="container　container-m">
+            <div th:if="${infoMessage}" class="row">
+                <div class="col-md-12 m-3">
+                    <div class="p-3 mb-2 bg-success text-white">
+                        <label th:text="${infoMessage}"/>
+                    </div>
+                </div>
+            </div>
+            <div th:if="${#arrays.length(#fields.detailedErrors())} > 0" class="row">
+                <div class="col-md-12 m-3">
+                    <div class="p-3 mb-2 bg-danger text-white">
+                        <div th:each="error : ${#fields.detailedErrors()}">
+                            <span th:text="${error.message}"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 m-3">
+                    <label>text1</label>
+                    <input th:field="*{text1}" th:errorclass="border-danger">
+                    <div class="text-danger" th:if="${#fields.hasErrors('text1')}" th:errors="*{text1}"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 m-3">
+                    <label>text2</label>
+                    <input th:field="*{text2}" th:classappend="${#fields.hasErrors('text2')} ? 'border-danger'">
+                    <div class="text-danger" th:if="${#fields.hasErrors('text2')}" th:errors="*{text2}"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 m-3">
+                    <button name="validated1" type="submit">入力チェック１</button>
+                </div>
+                <div class="col-md-12 m-3">
+                    <button name="validated2" type="submit">入力チェック２</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
