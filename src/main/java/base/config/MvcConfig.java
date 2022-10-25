@@ -10,24 +10,24 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 public class MvcConfig implements WebMvcConfigurer {
 
-//    @Autowired
-//    private MessageSource messageSource;
-//
-//    @Bean
-//    public LocalValidatorFactoryBean localValidatorFactoryBean(){
-//        LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
-//
-//        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-//        messageSource.setBasename("classpath:/ValidationMessages");
+    @Autowired
+    private MessageSource messageSource;
+
+    @Bean
+    public LocalValidatorFactoryBean localValidatorFactoryBean(){
+        LocalValidatorFactoryBean localValidatorFactoryBean = new LocalValidatorFactoryBean();
+
+        ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
+//        messageSource.setBasename("classpath:/messages01");
 //        messageSource.setDefaultEncoding("UTF-8");
-//
-//        localValidatorFactoryBean.setValidationMessageSource(messageSource);
-//
-//        return localValidatorFactoryBean;
-//    }
-//
-//    @Override
-//    public Validator getValidator() {
-//        return localValidatorFactoryBean();
-//    }
+
+        localValidatorFactoryBean.setValidationMessageSource(messageSource);
+
+        return localValidatorFactoryBean;
+    }
+
+    @Override
+    public Validator getValidator() {
+        return localValidatorFactoryBean();
+    }
 }

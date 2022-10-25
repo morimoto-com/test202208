@@ -32,7 +32,7 @@ public class T001ValidateController {
             T001ValidateForm form) {
         model.addAttribute("infoMessage", "初期処理完了");
         model.addAttribute(form);
-        return "T001Validate3";
+        return "T001Validate";
     }
 
     /**
@@ -58,7 +58,7 @@ public class T001ValidateController {
             model.addAttribute("infoMessage", "エラーなし");
         }
         model.addAttribute(form);
-        return "T001Validate3";
+        return "T001Validate";
     }
 
     /**
@@ -79,6 +79,6 @@ public class T001ValidateController {
             model.addAttribute("infoMessage", "エラーなし");
         }
         model.addAttribute(form);
-        return "T001Validate3";
+        return "T001Validate";
     }
 }

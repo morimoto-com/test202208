@@ -9,6 +9,8 @@
 <div layout:fragment="header">T001Validate</div>
 <div layout:fragment="contents">
     <form th:action="@{/t001}" th:method="post" th:object="${t001ValidateForm}" >
+        <label th:text="#{output.sample01}"/>
+        <label th:text="#{output.sample02}"/>
         <div class="container　container-m">
             <div th:if="${infoMessage}" class="row">
                 <div class="col-md-12 m-3">

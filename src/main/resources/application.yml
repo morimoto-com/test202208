@@ -1,3 +1,7 @@
 # ?????
 server:
   port: 8080
+#spring:
+#  messages:
+#    messages.propertiesを複数定義できるが言語設定などは無効になるのであまり使いどころなし
+#    basename: messages01, messages_ja, messages_en, messages
